@@ -1,16 +1,16 @@
 import { FaTrashCan } from 'react-icons/fa6';
 
-function MovieCard() {
+function MovieCard({movie}) {
   return (
-    <div className="col-6 m-5">
+    <div className="col-6">
       <div className="card bg-bone-white text-dark position-relative">
         <span className="position-absolute translate-middle badge bg-success custom-badge-position">
-          8.7
+          {movie.rate}
         </span>
 
         <div className="card-body d-flex justify-content-between">
           <h3 className="card-title m-0">
-            Inception
+            {movie.title}
           </h3>
           <div className="text-danger">
             <FaTrashCan />
