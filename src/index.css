@@ -6,6 +6,11 @@
   animation: pulse 2s infinite;
 }
 
+.custom-badge-position {
+  top: 0.3rem;
+  left: 0.7rem;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);
