@@ -1,12 +1,15 @@
-
-import MovieList from "./components/MovieList"
-import Navbar from "./components/Navbar"
+import MovieForm from './components/MovieForm';
+import MovieList from './components/MovieList';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <>
-      <Navbar/>
-      <MovieList/>
+      <Navbar />
+      <div className='d-flex justify-content-center'>
+        <MovieForm />
+      </div>
+      <MovieList />
     </>
   );
 }

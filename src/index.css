@@ -6,6 +6,10 @@
   animation: pulse 2s infinite;
 }
 
+.neon-shadow {
+  box-shadow: 0 0 3rem 0.1rem rgba(147, 147, 255, 0.464);
+}
+
 .custom-badge-position {
   top: 0.3rem;
   left: 0.7rem;
