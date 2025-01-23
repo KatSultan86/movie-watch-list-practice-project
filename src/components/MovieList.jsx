@@ -1,29 +1,12 @@
-import { useState } from 'react';
 import MovieCard from './MovieCard';
 
-function MovieList() {
-  const [movies, setMovies] = useState([
-    {
-      id: 1001,
-      title: 'Inception',
-      rate: 8.7,
-    },
-    {
-      id: 1002,
-      title: 'Titanic',
-      rate: 7.7,
-    },
-    {
-      id: 1003,
-      title: 'Harry Potter',
-      rate: 9.0,
-    },
-  ]);
-
-  return (
+function MovieList({ movies, removeMovie }) {
+  return movies.length < 1 ? (
+    <div className="text-center mt-5">No movies yet</div>
+  ) : (
     <div className="d-flex flex-column gap-3 align-items-center mt-5">
       {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
+        <MovieCard key={movie.id} movie={movie} removeMovie={removeMovie} />
       ))}
     </div>
   );
