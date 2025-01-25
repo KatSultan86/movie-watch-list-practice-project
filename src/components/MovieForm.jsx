@@ -25,8 +25,18 @@ function MovieForm({ addMovie }) {
     setValidRate(isValidRate(value));
   };
 
+  const isFormValid = validTitle && validRate;
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log('!isValidRate(rate)', !isValidRate(rate))
+    console.log('!isValidTitle(title)', !isValidTitle(title))
+
+    if(!isFormValid){
+      console.log('The submission failed due to invalid inputs!')
+      return;
+    }
 
     const newMovie = {
       id: Date.now(),
@@ -41,7 +51,12 @@ function MovieForm({ addMovie }) {
     // Reset the state
     setTitle('');
     setRate('');
+    // Reset the state of input validations
+    setValidRate(false);
+    setValidTitle(false);
   };
+
+  
 
   return (
     <form
@@ -78,6 +93,7 @@ function MovieForm({ addMovie }) {
         id="submit-btn"
         type="submit"
         className="btn btn-warning btn-sm col-xl-2 col-12"
+        disabled={!isFormValid} 
       >
         Add
       </button>

@@ -4,9 +4,10 @@ import Navbar from './components/Navbar';
 import { useState } from 'react';
 
 function App() {
-  const [movies, setMovies] = useState([
+  const [movies, setMovies] = useState([]);
 
-  ]);
+  // set up the state for the editingMovie
+  const [editingMovie, setEditingMovie] = useState(null);
 
   const addMovie = (newMovie) => {
     // We cannot mutate - the actual state (it is always immutable)
@@ -19,6 +20,16 @@ function App() {
     // we are accessing movies directly
     // const filteredArray = movies.filter((movie) => {movie.id !== id});
     setMovies((prev) => prev.filter((movie) => movie.id !== id));
+  };
+
+  const editMovie = (movieToEdit) => {
+    setEditingMovie(movieToEdit);
+  };
+
+  const updateMovie = (updatedMovie) => {
+    setMovies((prev) =>
+      prev.map((movie) => (movie.id === updateMovie.id ? updateMovie : movie))
+    );
   };
 
   return (
