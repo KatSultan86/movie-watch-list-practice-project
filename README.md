@@ -29,6 +29,13 @@ Install all required dependencies:
 npm install
 ```
 
+### 3.1 Add the local .env file
+Currently the file should have only one env_variable USER_ID in order to run this project:
+Note: You can get a user Id by creating a user with this api: /api/users
+```bash
+VITE_USER_ID=your_user_id
+```
+
 ### 4. Start the Development Server
 Run the development server:
 ```bash
