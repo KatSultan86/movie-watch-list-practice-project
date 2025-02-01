@@ -3,8 +3,8 @@ export const isValidTitle = (value) => {
     return value.trim() !== '' && value.trim().length >= 3;
 }
 
-export const isValidRate = (value) => {
-    console.log('Validating Rate', value)
-    const rate = Number(value);
-    return value !== '' && !isNaN(rate) && rate >= 1 && rate <= 10;
+export const isValidYear = (value) => {
+    console.log('Validating Year', value)
+    const year = Number(value);
+    return value !== '' && !isNaN(year) && year >= 1000 && year <= 3000;
 }

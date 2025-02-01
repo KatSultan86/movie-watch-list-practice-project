@@ -1,4 +1,4 @@
-function Navbar({children}) {
+function Navbar({ children }) {
   return (
     <nav className="navbar bg-body-tertiary">
       <div className="container">

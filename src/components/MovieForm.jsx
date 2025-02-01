@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
-import { isValidTitle, isValidRate } from '../utils.js';
+import { isValidTitle, isValidYear } from '../utils.js';
 
-function MovieForm({ addMovie, editingMovie, updateMovie }) {
+function MovieForm({ fetchMovies, editingMovie, updateMovie }) {
   const [title, setTitle] = useState('');
-  const [rate, setRate] = useState('');
+  const [year, setYear] = useState('');
 
   // add state that will control the validity of the inputs
   const [validTitle, setValidTitle] = useState(false);
-  const [validRate, setValidRate] = useState(false);
-
+  const [validYear, setValidYear] = useState(false);
+  
+  const USER_ID = 7;
 
   // we will use the useEffect hook to trigger an action when the editingMovie state changes
   useEffect(() => {
-    if(editingMovie){
+    if (editingMovie) {
       setTitle(editingMovie.title);
-      setRate(editingMovie.rate);
+      setYear(editingMovie.realease_year);
       setValidTitle(true);
-      setValidRate(true);
+      setValidYear(true);
     }
   }, [editingMovie]);
-
 
   // Requirements for inputs
   // title - not empty and more than 3 characters
@@ -31,50 +31,73 @@ function MovieForm({ addMovie, editingMovie, updateMovie }) {
     setValidTitle(isValidTitle(value));
   };
 
-  const handleRateInput = (e) => {
+  const handleYearInput = (e) => {
     const value = e.target.value;
-    setRate(value);
-    setValidRate(isValidRate(value));
+    setYear(value);
+    setValidYear(isValidYear(value));
   };
 
-  const isFormValid = validTitle && validRate;
+  const isFormValid = validTitle && validYear;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('!isValidRate(rate)', !isValidRate(rate))
-    console.log('!isValidTitle(title)', !isValidTitle(title))
-
-    if(!isFormValid){
-      console.log('The submission failed due to invalid inputs!')
+    if (!isFormValid) {
+      console.log('The submission failed due to invalid inputs!');
       return;
     }
 
+    `
+    {
+      "title": title,
+      "genre": "Uknown",
+      "release_year": year,
+      "user_id": USER_ID 
+    }
+    `
+
     const movieData = {
-      id: editingMovie ? editingMovie.id : Date.now(),
+      user_id: USER_ID,
       title: title,
-      rate: rate,
+      release_year: year,
+      genre: "N/A"
     };
 
-    if(editingMovie){
-      console.log('Update trigerred: ', movieData)
-      updateMovie(movieData);
-    } else {
-      console.log('New Movie Captured: ', movieData);
-      addMovie(movieData);
+    // if (editingMovie) {
+    //   console.log('Update trigerred: ', movieData);
+    //   updateMovie(movieData);
+    // } else {
+    //   console.log('New Movie Captured: ', movieData);
+    //   addMovie(movieData);
+    // }
+
+    try {
+      const options = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(movieData)
+      }
+      const response = await fetch('/api/movies', options);
+      
+      if (!response.ok){
+        throw new Error('Error: ' + response.status);
+      }
+
+      fetchMovies();
+
+    } catch (e){
+      console.log(e)
     }
-    
+
 
 
     // Reset the state
     setTitle('');
-    setRate('');
+    setYear('');
     // Reset the state of input validations
-    setValidRate(false);
+    setValidYear(false);
     setValidTitle(false);
   };
-
-  
 
   return (
     <form
@@ -97,21 +120,21 @@ function MovieForm({ addMovie, editingMovie, updateMovie }) {
       <div className="col-xl-3 col-12 mb-1">
         <div className="form-floating">
           <input
-            onChange={handleRateInput}
+            onChange={handleYearInput}
             type="number"
-            className={`form-control ${validRate ? '' : 'is-invalid'}`}
+            className={`form-control ${validYear ? '' : 'is-invalid'}`}
             id="movie-rate"
             placeholder="Movie Title"
-            value={rate}
+            value={year}
           />
-          <label htmlFor="movie-rate">Rate(1-10)</label>
+          <label htmlFor="movie-rate">Year</label>
         </div>
       </div>
       <button
         id="submit-btn"
         type="submit"
         className="btn btn-warning btn-sm col-xl-2 col-12"
-        disabled={!isFormValid} 
+        disabled={!isFormValid}
       >
         {editingMovie ? 'Update' : 'Add'}
       </button>
