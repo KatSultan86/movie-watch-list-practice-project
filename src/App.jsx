@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import ThemeToggler from './components/ThemeToggler';
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]); // {}
   
   const USER_ID = import.meta.env.VITE_USER_ID
 
@@ -14,9 +14,10 @@ function App() {
   const fetchMovies = async () => {
     try {
       const response = await fetch('/api/movies?user_id=' + USER_ID);
-      const data = await response.json();
+      const data = await response.json(); // {"err": ""}
       console.log('Data Fetched: ', data);
-      setMovies(data);
+      // Make sure that data is array before setting if not set to empty array
+      setMovies(Array.isArray(data) ? data : []);
     } catch (err) {
       console.log(err);
     }
