@@ -9,6 +9,7 @@ function App() {
   
   const USER_ID = import.meta.env.VITE_USER_ID
 
+  // new comment
   // we need to get the data from api and render on the screen
   const fetchMovies = async () => {
     try {
