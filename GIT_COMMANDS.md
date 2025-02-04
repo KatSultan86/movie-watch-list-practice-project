@@ -16,4 +16,9 @@
 4. Create and switch to branch in one line:
     - `git checkout -b branch_name`           
     - `git switch -c branch_name` 
-              
+5. In case yop want to delete a branch use this:
+    - `git branch -d branch_name` -> if there are some changes in that branch it wont allow you to delete it
+    - `git branch -D branch_name` - in that case you can run with -D flag to force delete it.
+6. Finally when youy commited all the changes to local new branch you want  to push it to remore repo. 
+    - `git push origin branch_name`    
+
