@@ -10,4 +10,10 @@
         - `git add .` or `git add -A` - to add all files to the git stage
         - `git commit -m"your message"` - this command will commit the changes locally (kind of saves the new changes to master locally)
         - `git push origin master` - this will push the changes to the remote repo
-        
+3. Change to a different branch with:
+    - `git checkout branch_name`       
+    - `git switch branch_name`
+4. Create and switch to branch in one line:
+    - `git checkout -b branch_name`           
+    - `git switch -c branch_name` 
+              
