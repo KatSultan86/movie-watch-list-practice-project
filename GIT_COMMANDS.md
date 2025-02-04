@@ -8,4 +8,6 @@
     - how do we commit in command line?
         - `git status` - to check what changes we have that we need to add to git tracking system `git stage`
         - `git add .` or `git add -A` - to add all files to the git stage
-        - `git commit -m"your message"`
+        - `git commit -m"your message"` - this command will commit the changes locally (kind of saves the new changes to master locally)
+        - `git push origin master` - this will push the changes to the remote repo
+        
